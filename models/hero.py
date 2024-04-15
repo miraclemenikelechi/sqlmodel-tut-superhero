@@ -1,11 +1,12 @@
-from sqlmodel import Field, SQLModel
 from uuid import UUID, uuid4
+
+from sqlmodel import Field, SQLModel
 
 
 class HeroBase(SQLModel):
-    name: str
+    name: str = Field(index=True)
     secret_name: str
-    age: int | None = None
+    age: int | None = Field(default=None, index=True)
 
 
 class CreateHero(HeroBase):

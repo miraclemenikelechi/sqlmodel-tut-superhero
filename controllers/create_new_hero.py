@@ -2,30 +2,30 @@ from fastapi import HTTPException
 from sqlmodel import select
 
 from core import SESSION_DEPENDENCY
-from crud import create
+from crud import create, exists_in_db
 from models import Hero
 
 
-async def create_new_hero(_data: dict, db: SESSION_DEPENDENCY) -> Hero:
+async def create_new_hero(data: dict, db: SESSION_DEPENDENCY) -> Hero:
     try:
         # check if hero exists
-        hero_exists: str | None = db.exec(
-            statement=select(Hero).where(Hero.name == _data.name)
-        ).first()
+        hero_exists: bool = await exists_in_db(
+            param=data.name, arg="name", model=Hero, db=db
+        )
 
         # raise an error info
         if hero_exists:
             raise HTTPException(
                 status_code=400,
-                detail=f"superhero with the name {_data.name} already exist.",
+                detail=f"superhero with the name {data.name} already exist.",
             )
 
         # create a new hero dictionary
         created_hero: Hero = {
-            "name": _data.name,
-            "secret_name": _data.secret_name,
-            "age": _data.age,
-            "hq": _data.hq,
+            "name": data.name,
+            "secret_name": data.secret_name,
+            "age": data.age,
+            "hq": data.hq,
         }
 
         # create in db
