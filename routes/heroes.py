@@ -3,7 +3,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
 from controllers import create_new_hero
-from lib import SESSION_DEPENDENCY
+from core import SESSION_DEPENDENCY
 from models import CreateHero, Hero
 
 heroes: APIRouter = APIRouter(

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from lib import server_config
+from core import server_config
 from routes import heroes
 
 server = FastAPI(

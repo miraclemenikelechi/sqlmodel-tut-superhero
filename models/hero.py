@@ -1,4 +1,5 @@
 from sqlmodel import Field, SQLModel
+from uuid import UUID, uuid4
 
 
 class HeroBase(SQLModel):
@@ -12,4 +13,4 @@ class CreateHero(HeroBase):
 
 
 class Hero(CreateHero, table=True):
-    id: int | None = Field(default=None, primary_key=True)
+    id: UUID | None = Field(default_factory=uuid4, primary_key=True)
