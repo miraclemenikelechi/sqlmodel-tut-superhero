@@ -11,6 +11,7 @@ uvicorn = "^0.29.0"
 fastapi = "^0.110.1"
 sqlmodel = "^0.0.16"
 pydantic-settings = "^2.2.1"
+alembic = "^1.13.1"
 
 
 [build-system]

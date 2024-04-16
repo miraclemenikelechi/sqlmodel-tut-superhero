@@ -7,6 +7,7 @@ class HeroBase(SQLModel):
     name: str = Field(index=True)
     secret_name: str
     age: int | None = Field(default=None, index=True)
+    power: str | None
 
 
 class CreateHero(HeroBase):
